@@ -34,9 +34,9 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{errorSellers}</MessageBox>
       ) : (
         <>
-          {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
+          {sellers?.length === 0 && <MessageBox>No Seller Found</MessageBox>}
           <Carousel showArrows autoPlay showThumbs={false}>
-            {sellers.map((seller) => (
+           {sellers?.map((seller) => (
               <div key={seller._id}>
                 <Link to={`/seller/${seller._id}`}>
                   <img src={seller.seller.logo} alt={seller.seller.name} />
