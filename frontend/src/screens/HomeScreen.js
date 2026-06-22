@@ -20,6 +20,7 @@ export default function HomeScreen() {
     error: errorSellers,
     users: sellers,
   } = userTopSellersList;
+  console.log(sellers);
 
   useEffect(() => {
     dispatch(listProducts({}));
@@ -34,9 +35,12 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{errorSellers}</MessageBox>
       ) : (
         <>
-          {sellers?.length === 0 && <MessageBox>No Seller Found</MessageBox>}
-          <Carousel showArrows autoPlay showThumbs={false}>
-           {sellers?.map((seller) => (
+         {(!Array.isArray(sellers) || sellers.length === 0) && (
+  <MessageBox>No Seller Found</MessageBox>
+)}
+         <Carousel showArrows autoPlay showThumbs={false}>
+  {Array.isArray(sellers) &&
+    sellers.map((seller) => (
               <div key={seller._id}>
                 <Link to={`/seller/${seller._id}`}>
                   <img src={seller.seller.logo} alt={seller.seller.name} />
